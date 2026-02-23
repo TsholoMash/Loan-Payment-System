@@ -14,8 +14,8 @@ public class LoanController {
         return loanService.createLoan(request.getLoanAmount(), request.getTerm());
     }
 
-    @GetMapping("/{id}")
-    public Loan getLoan(@PathVariable Long id) {
-        return loanService.getLoan(id);
+    @GetMapping("/{loanId}")
+    public Loan getLoan(@PathVariable Long loanId) {
+        return loanService.getLoan(loanId);
     }
 }
