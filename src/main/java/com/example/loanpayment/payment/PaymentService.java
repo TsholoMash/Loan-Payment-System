@@ -7,6 +7,7 @@ import com.example.loanpayment.loan.LoanRepository;
 import com.example.loanpayment.loan.LoanStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
@@ -18,6 +19,7 @@ public class PaymentService {
     @Autowired
     private LoanRepository loanRepository;
 
+    @Transactional
     public Payment makePayment(Long loanId, BigDecimal amount) throws ResourceNotFoundException, OverPaymentException {
         Loan loan = loanRepository.findById(loanId)
                 .orElseThrow(() -> new ResourceNotFoundException("Loan not found"));
