@@ -21,7 +21,7 @@ public class LoanService {
 
     public Loan getLoan(Long loanId) throws ResourceNotFoundException {
         return loanRepository.findById(loanId)
-                .orElseThrow(() -> new ResourceNotFoundException("Loan not fount"));
+                .orElseThrow(() -> new ResourceNotFoundException("Loan not found"));
     }
 
     public void settleLoan(Loan loan) {
