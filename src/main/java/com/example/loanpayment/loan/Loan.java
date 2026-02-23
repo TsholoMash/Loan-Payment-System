@@ -3,14 +3,16 @@ package com.example.loanpayment.loan;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
 public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long loanId;
 
-    private double loanAmount;
-    private double remainingBalance;
+    private BigDecimal loanAmount;
+    private BigDecimal remainingBalance;
     private int term; //months
 
     @Enumerated(EnumType.STRING)
@@ -24,19 +26,19 @@ public class Loan {
         this.loanId = loanId;
     }
 
-    public double getLoanAmount() {
+    public BigDecimal getLoanAmount() {
         return loanAmount;
     }
 
-    public void setLoanAmount(double loanAmount) {
+    public void setLoanAmount(BigDecimal loanAmount) {
         this.loanAmount = loanAmount;
     }
 
-    public double getRemainingBalance() {
+    public BigDecimal getRemainingBalance() {
         return remainingBalance;
     }
 
-    public void setRemainingBalance(double remainingBalance) {
+    public void setRemainingBalance(BigDecimal remainingBalance) {
         this.remainingBalance = remainingBalance;
     }
 

@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.math.BigDecimal;
+
 @Entity
 public class Payment {
     @Id
@@ -12,7 +14,7 @@ public class Payment {
     private Long paymentId;
 
     private Long loanId;
-    private double paymentAmount;
+    private BigDecimal paymentAmount;
 
     public Long getPaymentId() {
         return paymentId;
@@ -30,11 +32,11 @@ public class Payment {
         this.loanId = loanId;
     }
 
-    public double getPaymentAmount() {
+    public BigDecimal getPaymentAmount() {
         return paymentAmount;
     }
 
-    public void setPaymentAmount(double paymentAmount) {
+    public void setPaymentAmount(BigDecimal paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
 }

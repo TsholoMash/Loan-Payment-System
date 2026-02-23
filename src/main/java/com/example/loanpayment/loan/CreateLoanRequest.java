@@ -1,19 +1,24 @@
 package com.example.loanpayment.loan;
 
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+
+import java.math.BigDecimal;
 
 public class CreateLoanRequest {
 
-    @Positive
-    private double loanAmount;
+    @NotNull
+    @DecimalMin(value = "0.01")
+    private BigDecimal loanAmount;
     @Positive
     private int term;
 
-    public double getLoanAmount() {
+    public BigDecimal getLoanAmount() {
         return loanAmount;
     }
 
-    public void setLoanAmount(double loanAmount) {
+    public void setLoanAmount(BigDecimal loanAmount) {
         this.loanAmount = loanAmount;
     }
 

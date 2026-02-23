@@ -4,13 +4,15 @@ import com.example.loanpayment.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class LoanService {
 
     @Autowired
     private LoanRepository loanRepository;
 
-    public Loan createLoan(double amount, int term) {
+    public Loan createLoan(BigDecimal amount, int term) {
         Loan loan = new Loan();
         loan.setLoanAmount(amount);
         loan.setRemainingBalance(amount);   //initial amount is the one remaining
@@ -25,7 +27,7 @@ public class LoanService {
     }
 
     public void settleLoan(Loan loan) {
-        loan.setRemainingBalance(0);
+        loan.setRemainingBalance(BigDecimal.ZERO);
         loan.setStatus(LoanStatus.SETTLED);
         loanRepository.save(loan);
     }

@@ -8,6 +8,8 @@ import com.example.loanpayment.loan.LoanStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 @Service
 public class PaymentService {
 
@@ -16,7 +18,7 @@ public class PaymentService {
     @Autowired
     private LoanRepository loanRepository;
 
-    public Payment makePayment(Long loanId, double amount) throws ResourceNotFoundException, OverPaymentException {
+    public Payment makePayment(Long loanId, BigDecimal amount) throws ResourceNotFoundException, OverPaymentException {
         Loan loan = loanRepository.findById(loanId)
                 .orElseThrow(() -> new ResourceNotFoundException("Loan not found"));
 
@@ -24,12 +26,12 @@ public class PaymentService {
             throw new OverPaymentException("Loan already settled");
         }
 
-        if(amount > loan.getRemainingBalance()) {
+        if(amount.compareTo(loan.getRemainingBalance()) > 0) {
             throw new OverPaymentException("Payment exceed remaining balance");
         }
 
-        loan.setRemainingBalance(loan.getRemainingBalance() - amount);
-        if (loan.getRemainingBalance() == 0) {
+        loan.setRemainingBalance(loan.getRemainingBalance().subtract(amount));
+        if (loan.getRemainingBalance().compareTo(BigDecimal.ZERO) == 0) {
             loan.setStatus(LoanStatus.SETTLED);
         }
         loanRepository.save(loan);
