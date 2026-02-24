@@ -7,8 +7,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/loans")
 public class LoanController {
-    @Autowired
-    private LoanService loanService;
+
+    private final LoanService loanService;
+
+    public LoanController(LoanService loanService) {
+        this.loanService = loanService;
+    }
 
     @PostMapping
     public Loan createLoan(@Valid @RequestBody CreateLoanRequest request) {
