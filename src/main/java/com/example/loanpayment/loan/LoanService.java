@@ -1,7 +1,6 @@
 package com.example.loanpayment.loan;
 
 import com.example.loanpayment.exception.ResourceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -9,8 +8,11 @@ import java.math.BigDecimal;
 @Service
 public class LoanService {
 
-    @Autowired
-    private LoanRepository loanRepository;
+    private final LoanRepository loanRepository;
+
+    public LoanService(LoanRepository loanRepository) {
+        this.loanRepository = loanRepository;
+    }
 
     public Loan createLoan(BigDecimal amount, int term) {
         Loan loan = new Loan();
